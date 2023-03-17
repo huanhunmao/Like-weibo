@@ -5,7 +5,7 @@
 
 module.exports = {
     SECRET : 'kdajA*!nwqjq+',
-    DEFAULT_PICTURE: 'https://dwz.cn/rnTnftZs',
+    DEFAULT_PICTURE: 'https://img.cehca.com/uploadimg/image/20191218/20191218114706_36053.jpg',
     PAGE_SIZE: 5,
 
     // 正则表达式，匹配 '@昵称 - userName'
