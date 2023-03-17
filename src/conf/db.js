@@ -1,4 +1,9 @@
-const {isProd} = require('../utils//env.js') 
+/**
+ * @description 存储配置
+ * @author mark老师
+ */
+
+const { isProd } = require('../utils/env')
 
 let REDIS_CONF = {
     port: 6379,
