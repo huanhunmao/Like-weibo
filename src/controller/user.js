@@ -3,9 +3,9 @@
  * @description user controller
  * @author mark老师
  */
-const { registerUserNameNotExistInfo,registerFailInfo, loginFailInfo, deleteUserFailInfo } = require('../model/ErrorInfo')
+const { registerUserNameNotExistInfo,registerFailInfo, loginFailInfo, deleteUserFailInfo, changeInfoFailInfo } = require('../model/ErrorInfo')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
-const { getUserInfo, createUser,deleteUser } = require('../services/user')
+const { getUserInfo, createUser,deleteUser, updateUserInfo } = require('../services/user')
 const { cryptoFunc } = require('../utils/cryp')
 
 async function isExist(userName){
@@ -70,4 +70,42 @@ async function deleteCurrentUser(userName){
     return new ErrorModel(deleteUserFailInfo)
 }
 
-module.exports = {isExist,register,login,deleteCurrentUser}
+async function changeUserInfo(ctx, {nickName, city,picture}){
+    const {userName} = ctx.session.userInfo
+
+    if(!nickName){
+        nickName = userName
+    }
+    // service
+    const res = await updateUserInfo(
+        {
+            newCity:city,
+            newPicture:picture,
+            newNickName:nickName
+        },
+        {userName}
+    )
+
+    // 服务修改成功
+    if(res){
+        Object.assign(ctx.session.userInfo,{
+            nickName,
+            city,
+            picture
+        })
+
+        return new SuccessModel()
+    }
+
+    // 失败 
+    return new ErrorModel(changeInfoFailInfo)
+
+}
+
+module.exports = {
+    isExist,
+    register,
+    login,
+    deleteCurrentUser,
+    changeUserInfo,
+}
