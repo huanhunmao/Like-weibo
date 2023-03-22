@@ -3,7 +3,7 @@
  * @description user controller
  * @author mark老师
  */
-const { registerUserNameNotExistInfo,registerFailInfo, loginFailInfo, deleteUserFailInfo, changeInfoFailInfo } = require('../model/ErrorInfo')
+const { registerUserNameNotExistInfo,registerFailInfo, loginFailInfo, deleteUserFailInfo, changeInfoFailInfo, changePasswordFailInfo } = require('../model/ErrorInfo')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
 const { getUserInfo, createUser,deleteUser, updateUserInfo } = require('../services/user')
 const { cryptoFunc } = require('../utils/cryp')
@@ -102,10 +102,24 @@ async function changeUserInfo(ctx, {nickName, city,picture}){
 
 }
 
+async function changePassword(userName, password, newPassword){
+    const res = await updateUserInfo(
+        {newPassword:cryptoFunc(newPassword)},
+        {userName,password:cryptoFunc(password)}
+    )
+
+    if(res){
+        return new SuccessModel()
+    }
+
+    return new ErrorModel(changePasswordFailInfo)
+}
+
 module.exports = {
     isExist,
     register,
     login,
     deleteCurrentUser,
     changeUserInfo,
+    changePassword,
 }
