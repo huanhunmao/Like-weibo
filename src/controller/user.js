@@ -29,9 +29,9 @@ async function isExist(userName){
 async function register({userName, password,gender}){
     const userInfo = await getUserInfo(userName)
 
-    if(userInfo){
-        return new ErrorModel(registerUserNameExistInfo)
-    }
+    // if(userInfo){
+    //     return new ErrorModel(registerUserNameExistInfo)
+    // }
 
     // 注册 services
     try{

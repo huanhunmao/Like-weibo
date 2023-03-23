@@ -65,14 +65,51 @@ test('登陆成功', async() => {
     COOKIE = res.headers['set-cookie'].join(';')
 })
 
+// 修改基本信息 
+// test('修改基本信息成功', async() => {
+//     const res = await servers
+//     .patch('/api/user/changeInfo')
+//     .send({
+//         nickName: '测试name',
+//         city:'测试城市',
+//         picture:'/test.png'
+
+//     })
+//     .set('cookie',COOKIE)
+
+//     expect(res.body.errno).toBe(0)
+// })
+
+// 修改密码
+// test('修改密码成功', async() => {
+//     const res = await servers
+//     .patch('/api/user/changePassword')
+//     .send({
+//         password,
+//         newPassword: 'p_ejqwiewqiej1919'
+//     })
+//     .set('cookie',COOKIE)
+
+//     expect(res.body.errno).toBe(0)
+// })
+
 // 删除用户成功
 test('删除用户成功', async() => {
     const res = await servers
-    .post('/api/user/delete')
+    .patch('/api/user/delete')
     .set('cookie',COOKIE)
 
     expect(res.body.errno).toBe(0)
 })
+
+// 退出登陆
+// test('退出登陆成功', async() => {
+//     const res = await servers
+//     .post('/api/user/logout')
+//     .set('cookie',COOKIE)
+
+//     expect(res.body.errno).toBe(0)
+// })
 
 // 再次找不到 
 test('查询注册过的用户', async() => {
