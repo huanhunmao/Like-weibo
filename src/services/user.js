@@ -45,7 +45,6 @@ async function createUser({userName, password,gender = 3, nickName}){
         gender,
         nickName: nickName ? nickName : userName
     })
-    console.log('result',result)
 
     return result.dataValues
 }
