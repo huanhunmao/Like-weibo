@@ -69,10 +69,8 @@ const verify = util.promisify(jwtToken.verify)
 // })
 
 // 首页
-router.get('/',loginRedirect,(ctx,next) => {
-    ctx.body = {
-        title:'home'
-    }
+router.get('/',loginRedirect,async (ctx,next) => {
+    await ctx.render('index',{})
 })
 // router.get('/', loginRedirect, async (ctx, next) => {
 //     const userInfo = ctx.session.userInfo
@@ -118,18 +116,18 @@ router.get('/',loginRedirect,(ctx,next) => {
 // })
 
 // 测试 redis
-router.get('/json',loginCheck, async (ctx, next) => {
-    // const session = ctx.session
-    // if(session.viewNum == null){
-    //     session.viewNum =  0
-    // }
-    // session.viewNum ++
+// router.get('/json',loginCheck, async (ctx, next) => {
+//     // const session = ctx.session
+//     // if(session.viewNum == null){
+//     //     session.viewNum =  0
+//     // }
+//     // session.viewNum ++
 
-    ctx.body={
-        title:'koa2 json',
-        // session:session.viewNum,
-    }
-})
+//     ctx.body={
+//         title:'koa2 json',
+//         // session:session.viewNum,
+//     }
+// })
 
 // 个人主页
 router.get('/profile', loginRedirect, async (ctx, next) => {
