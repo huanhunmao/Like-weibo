@@ -7,7 +7,7 @@ const User = require('./User')
 const Blog = require('./Blog')
 
 // 建立外键 关联  一个用户可以有多个微博
-Blog.belongsTo(User,{
+Blog.belongsTo(User, {
     foreignKey: 'userId'
 })
 

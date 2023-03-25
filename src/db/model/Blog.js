@@ -6,20 +6,20 @@
 const seq = require('../seq')
 const { INTEGER, STRING, TEXT } = require('../types')
 
-const Blog = seq.define('blog',{
-    userId:{
-        type:INTEGER,
+const Blog = seq.define('blog', {
+    userId: {
+        type: INTEGER,
         allowNull: false,
-        content: '用户 id'
+        comment: '用户 ID'
     },
-    content:{
-        type:TEXT,
+    content: {
+        type: TEXT,
         allowNull: false,
-        content: '微博内容'
+        comment: '微博内容'
     },
-    picture: {
-        type:STRING,
-        content:'微博图片'
+    image: {
+        type: STRING,
+        comment: '图片地址'
     }
 })
 
