@@ -11,7 +11,6 @@ const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
 const koaStatic = require('koa-static')
 const {SECRET} = require('./conf/constant')
-const koaJwt = require('koa-jwt')
 
 const { REDIS_CONF } = require('./conf/db')
 const { isProd } = require('./utils/env')
@@ -19,6 +18,7 @@ const { SESSION_SECRET_KEY } = require('./conf/secretKeys')
 
 // 路由
 const homeAPIRouter = require('./routes/api/blog-home')
+const blogAPIRouter = require('./routes/api/blog-profile')
 const blogViewRouter = require('./routes/view/blog')
 const utilsAPIRouter = require('./routes/api/utils')
 const userViewRouter = require('./routes/view/user')
@@ -68,6 +68,7 @@ app.use(session({
 
 // routes
 app.use(homeAPIRouter.routes(), homeAPIRouter.allowedMethods())
+app.use(blogAPIRouter.routes(), blogAPIRouter.allowedMethods)
 app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods())
 app.use(utilsAPIRouter.routes(), utilsAPIRouter.allowedMethods())
 app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())

@@ -7,23 +7,17 @@ const fs = require('fs')
 const path = require('path')
 const ejs = require('ejs')
 
-// 获取 blog-list.ejs 的文件内容
+// 获取 blog-list.ejs 内容 方便 
 const BLOG_LIST_TPL = fs.readFileSync(
-    path.join(__dirname, '..', 'views', 'widgets', 'blog-list.ejs')
+    path.join(__dirname, '..', 'views','widgets','blog-list.ejs')
 ).toString()
 
-/**
- * 根据 blogList 渲染出 html 字符串
- * @param {Array} blogList 微博列表
- * @param {boolean} canReply 是否可以回复
- */
-function getBlogListStr(blogList = [], canReply = false) {
+// 使用 ejs 直接后端渲染
+function getBlogListStr(blogList = [] , canReply = false){
     return ejs.render(BLOG_LIST_TPL, {
         blogList,
         canReply
     })
 }
 
-module.exports = {
-    getBlogListStr
-}
+module.exports = getBlogListStr
