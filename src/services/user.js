@@ -6,6 +6,7 @@
 
 const {User} = require('../db/model/index')
 const { formatUserPicture } = require('./_format')
+const { addFollower } = require('./user-relation')
 
 /**
  * @param {string} userName
@@ -45,8 +46,12 @@ async function createUser({userName, password,gender = 3, nickName}){
         gender,
         nickName: nickName ? nickName : userName
     })
+    const data = result.dataValues
 
-    return result.dataValues
+    // 自己关注自己 （方便首页获取数据）
+    addFollower(data.id, data.id)
+
+    return data
 }
 
 async function deleteUser(userName){
@@ -65,7 +70,7 @@ async function updateUserInfo(
     // 拼接修改条件 
     let updateData = {}
     if(newNickName){
-        updateData.userName = newNickName
+        updateData.nickName = newNickName
     }
     if(newPassword){
         updateData.password = newPassword

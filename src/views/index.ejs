@@ -1,4 +1,4 @@
-<%- include('layout/header', { title: '微博 - 首页', isNav: true, list: true,
+<%- include('layout/header', { title: 'weibo', isNav: true, list: true,
 isInputBlog: true })%>
 
 <div class="container margin-top-20">
@@ -37,6 +37,14 @@ isInputBlog: true })%>
         <%- include('widgets/user-info', { userInfo: userData.userInfo, isMe:
         true, amIFollowed: false, atCount: userData.atCount });%>
       </div>
+
+      <!-- 粉丝 -->
+      <%- include('widgets/fans', { count: userData.fansData.count, userList:
+      userData.fansData.list })%>
+
+      <!-- 关注 -->
+      <%- include('widgets/followers', { count: userData.followersData.count,
+      userList: userData.followersData.list })%>
     </div>
     <!-- 右侧结束 -->
   </div>
